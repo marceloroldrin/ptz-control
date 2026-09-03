@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PTZ Control — Download</title>
+    <meta
+      name="description"
+      content="Baixe o PTZ Control: painel para câmeras PTZ (VISCA) e dock no OBS Studio."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">Open source · VISCA over IP</p>
+        <h1>PTZ Control</h1>
+        <p class="lead">
+          Controle câmeras PTZ pelo navegador, app desktop ou Custom Browser Dock do OBS.
+          Sem instalar Node.js no Windows.
+        </p>
+        <p id="versionBadge" class="version">Carregando última versão…</p>
+      </header>
+
+      <section class="downloads" aria-label="Downloads">
+        <a id="btnSetup" class="btn primary disabled" href="#">
+          Download Windows (Setup)
+        </a>
+        <a id="btnPortable" class="btn secondary disabled" href="#">
+          Download Windows (Portable)
+        </a>
+        <a
+          class="btn ghost"
+          href="https://github.com/marceloroldrin/ptz-control/releases"
+          target="_blank"
+          rel="noopener"
+        >
+          Ver todas as releases
+        </a>
+      </section>
+
+      <p id="status" class="status" role="status"></p>
+
+      <section class="steps">
+        <h2>Como usar</h2>
+        <ol>
+          <li>Baixe e abra o instalador (ou o portable).</li>
+          <li>Configure o IP da câmera em ⚙ (UDP 52381 ou TCP 5678).</li>
+          <li>
+            No OBS: <strong>Docks → Custom Browser Docks</strong> →
+            <code>http://127.0.0.1:8765</code>
+          </li>
+        </ol>
+      </section>
+
+      <footer class="footer">
+        <a href="https://github.com/marceloroldrin/ptz-control">GitHub</a>
+        <span>·</span>
+        <a href="https://github.com/marceloroldrin/ptz-control/blob/main/README.md">Docs</a>
+        <span>·</span>
+        <span>MIT License</span>
+      </footer>
+    </main>
+
+    <script>
+      const REPO = "marceloroldrin/ptz-control";
+      const API = `https://api.github.com/repos/${REPO}/releases/latest`;
+
+      const versionBadge = document.getElementById("versionBadge");
+      const statusEl = document.getElementById("status");
+      const btnSetup = document.getElementById("btnSetup");
+      const btnPortable = document.getElementById("btnPortable");
+
+      function pickAsset(assets, pattern) {
+        return assets.find((asset) => pattern.test(asset.name));
+      }
+
+      function enableButton(button, asset, label) {
+        button.href = asset.browser_download_url;
+        button.classList.remove("disabled");
+        button.textContent = `${label} · ${asset.name}`;
+      }
+
+      async function loadLatest() {
+        try {
+          const response = await fetch(API, {
+            headers: { Accept: "application/vnd.github+json" },
+          });
+
+          if (!response.ok) {
+            throw new Error(
+              response.status === 404
+                ? "Nenhuma release publicada ainda."
+                : `Falha ao buscar release (${response.status}).`,
+            );
+          }
+
+          const release = await response.json();
+          const assets = release.assets || [];
+          const setup = pickAsset(assets, /PTZ-Control-Setup-.*\.exe$/i);
+          const portable = pickAsset(assets, /PTZ-Control-Portable-.*\.exe$/i);
+
+          versionBadge.textContent = `Última versão: ${release.tag_name}`;
+
+          if (setup) enableButton(btnSetup, setup, "Download Windows (Setup)");
+          if (portable) enableButton(btnPortable, portable, "Download Windows (Portable)");
+
+          if (!setup && !portable) {
+            statusEl.textContent =
+              "Release encontrada, mas ainda sem arquivos .exe. Aguarde o CI terminar.";
+            btnSetup.href = release.html_url;
+            btnSetup.classList.remove("disabled");
+            btnSetup.textContent = "Abrir release no GitHub";
+          } else {
+            statusEl.textContent = "Pronto para baixar.";
+          }
+        } catch (error) {
+          versionBadge.textContent = "Release indisponível";
+          statusEl.textContent = error.message;
+          btnSetup.href = `https://github.com/${REPO}/releases`;
+          btnSetup.classList.remove("disabled");
+          btnSetup.textContent = "Ver releases no GitHub";
+        }
+      }
+
+      loadLatest();
+    </script>
+  </body>
+</html>

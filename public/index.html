@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OBS PTZ Web</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="header">
+        <div>
+          <h1>PTZ Web</h1>
+          <p id="status">Conectando...</p>
+        </div>
+        <button id="settingsToggle" class="icon-btn" title="Configurações">⚙</button>
+      </header>
+
+      <section class="controls">
+        <div class="camera-row">
+          <label for="cameraSelect">Câmera</label>
+          <select id="cameraSelect"></select>
+        </div>
+
+        <div class="speed-row">
+          <label for="panSpeed">Pan <span id="panSpeedValue">10</span></label>
+          <input id="panSpeed" type="range" min="1" max="24" value="10" />
+          <label for="tiltSpeed">Tilt <span id="tiltSpeedValue">8</span></label>
+          <input id="tiltSpeed" type="range" min="1" max="20" value="8" />
+        </div>
+
+        <div class="pad">
+          <button class="pad-btn" data-dir="upLeft">↖</button>
+          <button class="pad-btn" data-dir="up">↑</button>
+          <button class="pad-btn" data-dir="upRight">↗</button>
+          <button class="pad-btn" data-dir="left">←</button>
+          <button class="pad-btn stop" data-dir="stop">■</button>
+          <button class="pad-btn" data-dir="right">→</button>
+          <button class="pad-btn" data-dir="downLeft">↙</button>
+          <button class="pad-btn" data-dir="down">↓</button>
+          <button class="pad-btn" data-dir="downRight">↘</button>
+        </div>
+
+        <div class="zoom-row">
+          <button id="zoomOut" class="action-btn">Zoom −</button>
+          <button id="zoomStop" class="action-btn">Stop</button>
+          <button id="zoomIn" class="action-btn">Zoom +</button>
+        </div>
+
+        <div class="presets">
+          <h2>Presets</h2>
+          <div id="presetGrid" class="preset-grid"></div>
+        </div>
+      </section>
+
+      <aside id="settingsPanel" class="settings hidden">
+        <h2>Configurações</h2>
+        <form id="settingsForm">
+          <label>Nome<input name="name" required /></label>
+          <label>IP<input name="host" required /></label>
+          <label>Porta<input name="port" type="number" required /></label>
+          <label>Transporte
+            <select name="transport">
+              <option value="udp">UDP (VISCA over IP, ex. Sony 52381)</option>
+              <option value="tcp">TCP (VISCA raw, ex. 5678)</option>
+            </select>
+          </label>
+          <label>Endereço VISCA<input name="viscaAddress" type="number" min="1" max="7" value="1" /></label>
+          <div class="settings-actions">
+            <button type="submit">Salvar câmera</button>
+            <button type="button" id="addCamera">Adicionar câmera</button>
+          </div>
+        </form>
+      </aside>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

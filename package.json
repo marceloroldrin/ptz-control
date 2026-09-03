@@ -1,0 +1,74 @@
+{
+  "name": "ptz-control",
+  "version": "0.1.0",
+  "description": "Painel web PTZ para OBS via VISCA over IP",
+  "author": "Marcelo Roldrin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marceloroldrin/ptz-control.git"
+  },
+  "homepage": "https://marceloroldrin.github.io/ptz-control/",
+  "type": "module",
+  "main": "desktop/main.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "electron": "electron .",
+    "electron:dev": "electron . --enable-logging",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.ptzcontrol.app",
+    "productName": "PTZ Control",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**/*",
+      "src/**/*",
+      "public/**/*",
+      "config/cameras.json",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.video",
+      "target": ["dmg", "zip"],
+      "artifactName": "PTZ-Control-${version}-mac-${arch}.${ext}"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "artifactName": "PTZ-Control-${version}-linux.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "PTZ-Control-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "PTZ-Control-Portable-${version}.${ext}"
+    }
+  }
+}

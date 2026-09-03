@@ -1,0 +1,186 @@
+:root {
+  color-scheme: dark;
+  --bg: #171a21;
+  --panel: #1f2430;
+  --border: #2d3444;
+  --text: #e8ecf4;
+  --muted: #9aa4b8;
+  --accent: #4c8bf5;
+  --accent-hover: #6aa0ff;
+  --danger: #f07178;
+  --ok: #7fd992;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.panel {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+#status {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+#status[data-ok='0'] {
+  color: var(--danger);
+}
+
+.icon-btn,
+.action-btn,
+.pad-btn,
+.preset-card button,
+.settings button {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icon-btn:hover,
+.action-btn:hover,
+.pad-btn:hover,
+.preset-card button:hover,
+.settings button:hover {
+  border-color: var(--accent);
+}
+
+.camera-row,
+.speed-row,
+.zoom-row {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.camera-row label,
+.speed-row label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+select,
+input[type='number'],
+input[type='text'] {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #12151c;
+  color: var(--text);
+}
+
+.pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pad-btn {
+  height: 52px;
+  font-size: 1.2rem;
+}
+
+.pad-btn.stop {
+  background: #2a3140;
+}
+
+.zoom-row {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.action-btn {
+  padding: 10px;
+}
+
+.presets h2 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.preset-card {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.preset-card span {
+  font-weight: 600;
+}
+
+.preset-card button {
+  padding: 8px;
+}
+
+.preset-card button.secondary {
+  opacity: 0.85;
+}
+
+.settings {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.settings.hidden {
+  display: none;
+}
+
+.settings form {
+  display: grid;
+  gap: 10px;
+}
+
+.settings label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.settings-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.settings button {
+  padding: 10px;
+}
