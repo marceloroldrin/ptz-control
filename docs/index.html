@@ -41,8 +41,143 @@
 
       <p id="status" class="status" role="status"></p>
 
+      <section class="guide" aria-labelledby="guide-title">
+        <h2 id="guide-title">Guia rápido</h2>
+        <p class="guide-intro">
+          A página de download é só o começo. Depois de instalar, você abre o painel local,
+          aponta para a câmera VISCA e pode embutir tudo no OBS como dock lateral.
+        </p>
+
+        <article class="guide-step">
+          <div class="guide-copy">
+            <p class="step-label">Passo 1</p>
+            <h3>Baixe e abra o app</h3>
+            <p>
+              Use o instalador <strong>Setup</strong> ou o <strong>Portable</strong> acima.
+              No Windows, se aparecer aviso de app desconhecido, escolha
+              <strong>Mais informações → Executar assim mesmo</strong>.
+            </p>
+            <p>
+              Ao abrir, o PTZ Control sobe automaticamente em
+              <code>http://127.0.0.1:8765</code>. Mantenha o app aberto enquanto usa o painel.
+            </p>
+          </div>
+        </article>
+
+        <article class="guide-step guide-step--split">
+          <div class="guide-copy">
+            <p class="step-label">Passo 2</p>
+            <h3>Configure a câmera</h3>
+            <p>
+              Clique em <strong>⚙</strong> e preencha o IP, a porta e o transporte da câmera.
+              A maioria das câmeras Sony usa <strong>UDP na porta 52381</strong>; muitas genéricas
+              usam <strong>TCP na porta 5678</strong>.
+            </p>
+            <ul class="guide-list">
+              <li><strong>Nome:</strong> só para identificar no seletor.</li>
+              <li><strong>IP:</strong> endereço da câmera na rede local.</li>
+              <li><strong>Endereço VISCA:</strong> normalmente <code>1</code>.</li>
+            </ul>
+          </div>
+          <figure class="guide-figure">
+            <img
+              src="images/configuracoes.png"
+              alt="Painel de configurações com campos Nome, IP, Porta, Transporte e Endereço VISCA"
+              width="420"
+              height="480"
+              loading="lazy"
+            />
+            <figcaption>Configurações da câmera no painel local.</figcaption>
+          </figure>
+        </article>
+
+        <article class="guide-step guide-step--split">
+          <div class="guide-copy">
+            <p class="step-label">Passo 3</p>
+            <h3>Use o painel PTZ</h3>
+            <p>
+              O layout foi pensado para caber no dock do OBS ou no celular na mesma rede.
+              Segure os botões do pad para mover; solte para parar. Os presets permitem
+              <strong>Ir</strong> para uma posição salva ou <strong>Salvar</strong> a posição atual.
+            </p>
+            <ul class="guide-list">
+              <li><strong>Pad direcional:</strong> pan/tilt contínuo enquanto pressionado.</li>
+              <li><strong>Zoom +/−:</strong> zoom contínuo; <strong>Stop</strong> interrompe.</li>
+              <li><strong>Presets P1–P8:</strong> posições rápidas da câmera.</li>
+            </ul>
+          </div>
+          <figure class="guide-figure">
+            <img
+              src="images/painel-principal.png"
+              alt="Painel PTZ com seletor de câmera, sliders de pan e tilt, pad direcional, zoom e presets"
+              width="420"
+              height="680"
+              loading="lazy"
+            />
+            <figcaption>Controles principais do PTZ Control.</figcaption>
+          </figure>
+        </article>
+
+        <article class="guide-step">
+          <div class="guide-copy">
+            <p class="step-label">Passo 4</p>
+            <h3>Embuta no OBS Studio</h3>
+            <p>
+              Com o app rodando, abra o OBS e vá em
+              <strong>Docks → Custom Browser Docks...</strong>. Use estes valores:
+            </p>
+          </div>
+          <div class="obs-mock" aria-label="Exemplo do diálogo Custom Browser Docks do OBS">
+            <div class="obs-dialog">
+              <p class="obs-dialog-title">Custom Browser Docks</p>
+              <label class="obs-field">
+                <span>Dock name</span>
+                <input type="text" readonly value="PTZ Control" />
+              </label>
+              <label class="obs-field">
+                <span>URL</span>
+                <input type="text" readonly value="http://127.0.0.1:8765" />
+              </label>
+              <div class="obs-actions">
+                <span class="obs-btn">Cancel</span>
+                <span class="obs-btn obs-btn--primary">Apply</span>
+              </div>
+            </div>
+          </div>
+          <p class="guide-note">
+            O dock aparece ao lado do OBS. Se quiser controlar por tablet, deixe o app escutando
+            na rede e acesse <code>http://IP-DO-PC:8765</code> no navegador do dispositivo.
+          </p>
+        </article>
+
+        <div class="reference">
+          <h3>Referência rápida de conexão</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Transporte</th>
+                <th>Porta comum</th>
+                <th>Quando usar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>UDP</td>
+                <td><code>52381</code></td>
+                <td>VISCA over IP (ex.: Sony)</td>
+              </tr>
+              <tr>
+                <td>TCP</td>
+                <td><code>5678</code></td>
+                <td>VISCA raw (ex.: câmeras genéricas)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <section class="steps">
-        <h2>Como usar</h2>
+        <h2>Resumo em 3 passos</h2>
         <ol>
           <li>Baixe e abra o instalador (ou o portable).</li>
           <li>Configure o IP da câmera em ⚙ (UDP 52381 ou TCP 5678).</li>
