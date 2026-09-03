@@ -1,3 +1,35 @@
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("./fonts/CabinetGrotesk-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("./fonts/CabinetGrotesk-Extrabold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --bg: #0f1218;
@@ -7,6 +39,8 @@
   --muted: #9aa4b8;
   --accent: #4c8bf5;
   --accent-hover: #6aa0ff;
+  --font-display: "Cabinet Grotesk", system-ui, sans-serif;
+  --font-body: "Satoshi", system-ui, sans-serif;
 }
 
 * {
@@ -16,7 +50,8 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
+  font-weight: 500;
   background:
     radial-gradient(circle at top, #1d2a44 0%, transparent 45%),
     var(--bg);
@@ -31,15 +66,18 @@ body {
 
 .hero h1 {
   margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
   font-size: clamp(2rem, 5vw, 2.8rem);
   letter-spacing: -0.03em;
 }
 
 .eyebrow {
   margin: 0 0 8px;
+  font-family: var(--font-display);
   color: var(--accent);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -75,7 +113,7 @@ body {
   padding: 14px 18px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text);
   transition: 0.15s ease;
 }
@@ -124,6 +162,8 @@ body {
 
 .steps h2 {
   margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.1rem;
 }
 
